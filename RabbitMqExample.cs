@@ -6,9 +6,9 @@ namespace RabbitMqExample
     public static class RabbitMqExample
     {
         [FunctionName("RabbitMqExample")]
-        [return: RabbitMQ(QueueName = "outputQueue", ConnectionStringSetting = "RabbitMqConnection")]
+        [return: RabbitMQ(QueueName = "%RabbitMqOutQueueName%", ConnectionStringSetting = "RabbitMqConnectionString")]
         public static string Run(
-            [RabbitMQTrigger("inputQueue", ConnectionStringSetting = "RabbitMqConnection")] string name,
+            [RabbitMQTrigger(queueName: "%RabbitMqInQueueName%", ConnectionStringSetting = "RabbitMqConnectionString")] string name,
             ILogger log)
         {
             log.LogInformation($"Message received: {name}.");
